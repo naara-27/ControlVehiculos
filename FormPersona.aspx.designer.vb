@@ -32,22 +32,40 @@ Partial Public Class FormPersona
     Protected WithEvents txtNombre As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtApellido.
+    '''Control txtApellido1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtApellido As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtApellido1 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control txtEdad.
+    '''Control txtApellido2.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtEdad As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtApellido2 As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control txtFechaNacimiento.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtFechaNacimiento As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control DropDownList1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control btnMostrar.
