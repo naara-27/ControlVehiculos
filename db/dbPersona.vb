@@ -2,12 +2,12 @@
 Imports System.Security.Cryptography
 
 Public Class dbPersona
-    Public ReadOnly ConectionString As String = ConfigurationManager.ConnectionStrings("II46ConnectionString").ConnectionString
+    Public ReadOnly ConectionString As String = ConfigurationManager.ConnectionStrings("II46_P3ConnectionString").ConnectionString
     Private ReadOnly dbHelper = New DbHelper() ' Clase para manejar conexiones y consultas
 
     Public Function create(Persona As Persona) As String
         Try
-            Dim sql As String = "INSERT INTO Personas (Nombre, Apellido, Apellido2, Nacionalidad, fechaNacimiento, Telefono) 
+            Dim sql As String = "INSERT INTO Personas (Nombre, Apellido1, Apellido2, Nacionalidad, fechaNacimiento, Telefono) 
             VALUES (@Nombre, @Apellido1, @Apellido2, @Nacionalidad, @fechaNacimiento, @Telefono)"
             Dim Parametros As New List(Of SqlParameter) From {
                 New SqlParameter("@Nombre", Persona.Nombre),
