@@ -20,15 +20,15 @@ Public Class dbLogin
         Return False
     End Function
 
-    Public Function RegisterUser(ByRef usuario As String, ByRef password As String, ByRef email As String) As String
+    Public Function RegisterUser(ByRef usuario As Usuario) As String
         Try
             Dim sql As String = "INSERT INTO Usuarios ([NombreUsuario]
            ,[Contrasena]
            ,[Email]) VALUES (@Usuario, @Password, @email)"
             Dim Parametros As New List(Of SqlParameter) From {
-                New SqlParameter("@Usuario", usuario),
-                New SqlParameter("@Password", password),
-                New SqlParameter("@email", password)
+                New SqlParameter("@Usuario", usuario.NombreUsuario),
+                New SqlParameter("@Password", usuario.Contrasena),
+                New SqlParameter("@email", usuario.Email)
             }
             dbHelper.ExecuteNonQuery(sql, Parametros)
         Catch ex As Exception
