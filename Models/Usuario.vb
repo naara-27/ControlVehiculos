@@ -21,4 +21,8 @@
         Me.Activo = activo
     End Sub
 
+    Public Sub New(nombreUsuario As String, contrasena As String, email As String)
+        Me.New(nombreUsuario, contrasena)
+        Me.Email = email
+    End Sub
 End Class

@@ -16,9 +16,8 @@ Public Class Registro
             Return
         End If
         Dim encrypter As New Simple3Des("MiClaveSecreta123") ' Clave de encriptación
-        Dim pass As String = encrypter.EncryptData(Password)
-        Dim usuario As Usuario = New Usuario(nombreUsuario, pass)
-        usuario.Email = txtEmail.Text
+        Dim pass As String = encrypter.EncryptData(Password) ' Encriptar la contraseña
+        Dim usuario As Usuario = New Usuario(nombreUsuario, pass, txtEmail.Text)
 
         Dim mensaje = dbHelper.RegisterUser(usuario)
         If mensaje.Contains("Error") Then
