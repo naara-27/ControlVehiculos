@@ -25,4 +25,7 @@
         Me.New(nombreUsuario, contrasena)
         Me.Email = email
     End Sub
+
+    Public Sub New()
+    End Sub
 End Class
