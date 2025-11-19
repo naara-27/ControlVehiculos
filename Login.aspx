@@ -76,13 +76,13 @@
                                         <a href="#" class="small text-muted text-decoration-none">¿Olvidaste la contraseña?</a>
                                     </div>
 
-                                    <!-- Conservamos labels adicionales por compatibilidad -->
+                                  <%-- Lables --%>
                                     <asp:Label ID="lblUsuario" runat="server" Visible="false"></asp:Label>
                                     <asp:Label ID="lblEmail" runat="server" Visible="false"></asp:Label>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- /.card -->
+                    </div> 
                 </div>
             </div>
         </div>

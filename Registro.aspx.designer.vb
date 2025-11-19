@@ -23,15 +23,6 @@ Partial Public Class Registro
     Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblUsuario.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblUsuario As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''Control txtUsuario.
     '''</summary>
     '''<remarks>
@@ -39,15 +30,6 @@ Partial Public Class Registro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtUsuario As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control lblEmail.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblEmail As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control txtEmail.
@@ -59,15 +41,6 @@ Partial Public Class Registro
     Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control lblPassword.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblPassword As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''Control txtPassword.
     '''</summary>
     '''<remarks>
@@ -75,15 +48,6 @@ Partial Public Class Registro
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtPassword As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control lblConfirmarPassword.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblConfirmarPassword As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control txtConfirmarPassword.
