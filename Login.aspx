@@ -48,7 +48,7 @@
                                     <path d="M12 7v6l4 2" stroke="white" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                                 <h3>Acceso de Usuario</h3>
-                                <p>Ingresa tu nombre de uusario y contraseña para la gestion de usuarios y vehículos</p>
+                                <p>Ingresa tu nombre de usario y contraseña para la gestion de usuarios y vehículos</p>
                             </div>
 
                             <div class="col-md-7">

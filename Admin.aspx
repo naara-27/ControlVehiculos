@@ -22,7 +22,7 @@
     <script type="text/javascript">
         window.onload = function () {
             Swal.fire({
-                title: '¡Bienvenida!',
+                title: '¡Hola!',
                 text: 'Estás en el panel de administración',
                 icon: 'info',
                 confirmButtonColor: '#d63384',

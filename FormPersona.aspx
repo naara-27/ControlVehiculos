@@ -4,46 +4,96 @@
 
     <asp:HiddenField ID="editando" runat="server" />
 
-    <div class="container d-flex flex-column mb-3 gap-2">
+    <div class="container mt-4 d-flex justify-content-center">
+        <div class="card shadow-sm border-0 w-100" style="max-width:600px; background-color:#fff0f5;">
+            <div class="card-header text-white text-center" style="background-color:#d63384;">
+                <h4 class="mb-0">Formulario de Persona</h4>
+            </div>
+            <div class="card-body d-flex flex-column gap-3 align-items-center">
+                <asp:TextBox ID="txtNombre" CssClass="form-control border-pink text-center" placeholder="Nombre" runat="server" />
+                <asp:TextBox ID="txtApellido1" CssClass="form-control border-pink text-center" placeholder="Primer Apellido" runat="server" />
+                <asp:TextBox ID="txtApellido2" CssClass="form-control border-pink text-center" placeholder="Segundo Apellido" runat="server" />
+                <asp:TextBox ID="txtNacionalidad" CssClass="form-control border-pink text-center" placeholder="Nacionalidad" runat="server" />
+                <asp:TextBox ID="txtfechaNacimiento" CssClass="form-control border-pink text-center" placeholder="Fecha de Nacimiento" runat="server" TextMode="Date" />
+                <asp:TextBox ID="txtTelefono" CssClass="form-control border-pink text-center" placeholder="Teléfono" runat="server" />
 
-        <asp:TextBox ID="txtNombre" CssClass="form-control" placeholder="Nombre" runat="server"></asp:TextBox>
-        <asp:TextBox ID="txtApellido1" CssClass="form-control" placeholder="Apellido1" runat="server"></asp:TextBox>
-        <asp:TextBox ID="txtApellido2" CssClass="form-control" placeholder="Apellido2" runat="server"></asp:TextBox>
-        <asp:TextBox ID="txtNacionalidad" CssClass="form-control" placeholder="Nacionalidad" runat="server"></asp:TextBox>
-        <asp:TextBox ID="txtfechaNacimiento" CssClass="form-control" placeholder="FechaNacimiento" runat="server" TextMode="Date"></asp:TextBox>
-        <asp:TextBox ID="txtTelefono" CssClass="form-control" placeholder="Telefono" runat="server"></asp:TextBox>
+                <div class="d-flex gap-2">
+                    <asp:Button ID="btnMostrar" runat="server" CssClass="btn btn-pink text-white fw-semibold" Text="Guardar" OnClick="btn_guardar" />
+                    <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-outline-pink fw-semibold" Text="Actualizar" OnClick="btnActualizar_Click" />
+                </div>
 
-
-        <asp:Button ID="btnMostrar" runat="server" CssClass="btn btn-primary btn-hover-move" Text="Guardar" OnClick="btn_guardar" />
-        <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-primary btn-hover-move" Text="Actualizar" OnClick="btnActualizar_Click" />
-
-        <asp:Label ID="lblMensaje" runat="server" Text=""></asp:Label>
-
+                <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold text-danger" />
+            </div>
+        </div>
     </div>
-    <asp:GridView ID="gvPersonas" CssClass="table table-striped table-hover table-success" runat="server" AutoGenerateColumns="False"
-        DataSourceID="SqlDataSource1" DataKeyNames="idPersona"
-        OnRowDeleting="gvPersonas_RowDeleting"
-        OnRowEditing="gvPersonas_RowEditing"
-        OnRowCancelingEdit="gvPersonas_RowCancelingEdit"
-        OnRowUpdating="gvPersonas_RowUpdating"
-        OnSelectedIndexChanged="gvPersonas_SelectedIndexChanged">
-        <Columns>
-            <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="btn btn-success" />
-            <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-primary" />
-            <asp:BoundField DataField="idPersona" HeaderText="ID" Visible="False" ReadOnly="True" SortExpression="idPersona" />
-            <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
-            <asp:BoundField DataField="Apellido1" HeaderText="Primer Apellido" SortExpression="Apellido1" />
-            <asp:BoundField DataField="Apellido2" HeaderText="Segundo Apellido" SortExpression="Apellido2" />
-            <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" SortExpression="Nacionalidad" />
-            <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha Nacimiento" SortExpression="FechaNacimiento" />
-            <asp:BoundField DataField="Telefono" HeaderText="Telefono" SortExpression="Telefono" />
-            <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
-        </Columns>
-    </asp:GridView>
+
+    <div class="container mt-4">
+        <asp:GridView ID="gvPersonas" CssClass="table table-striped table-hover border border-pink" runat="server" AutoGenerateColumns="False"
+            DataSourceID="SqlDataSource1" DataKeyNames="idPersona"
+            OnRowDeleting="gvPersonas_RowDeleting"
+            OnRowEditing="gvPersonas_RowEditing"
+            OnRowCancelingEdit="gvPersonas_RowCancelingEdit"
+            OnRowUpdating="gvPersonas_RowUpdating"
+            OnSelectedIndexChanged="gvPersonas_SelectedIndexChanged">
+            <Columns>
+                <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="btn btn-rose-light" />
+                <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
+                <asp:BoundField DataField="idPersona" HeaderText="ID" Visible="False" ReadOnly="True" SortExpression="idPersona" />
+                <asp:BoundField DataField="Nombre" HeaderText="Nombre" SortExpression="Nombre" />
+                <asp:BoundField DataField="Apellido1" HeaderText="Primer Apellido" SortExpression="Apellido1" />
+                <asp:BoundField DataField="Apellido2" HeaderText="Segundo Apellido" SortExpression="Apellido2" />
+                <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" SortExpression="Nacionalidad" />
+                <asp:BoundField DataField="FechaNacimiento" HeaderText="Fecha Nacimiento" SortExpression="FechaNacimiento" />
+                <asp:BoundField DataField="Telefono" HeaderText="Teléfono" SortExpression="Telefono" />
+                <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
+            </Columns>
+        </asp:GridView>
+    </div>
+
     <asp:SqlDataSource ID="SqlDataSource1" runat="server"
         ConnectionString="<%$ ConnectionStrings:II46_P3ConnectionString %>" 
         ProviderName="<%$ ConnectionStrings:II46_P3ConnectionString.ProviderName %>" 
         SelectCommand="SELECT * FROM [Personas]"></asp:SqlDataSource>
 
+    <!-- SweetAlert Script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    <!-- Estilos rosados personalizados -->
+    <style>
+        .border-pink {
+            border: 1px solid #d63384 !important;
+        }
+        .btn-pink {
+            background-color: #d63384;
+            border: none;
+        }
+        .btn-pink:hover {
+            background-color: #c2185b;
+        }
+        .btn-outline-pink {
+            border: 1px solid #d63384;
+            color: #d63384;
+            background-color: transparent;
+        }
+        .btn-outline-pink:hover {
+            background-color: #d63384;
+            color: white;
+        }
+        .btn-rose-light {
+            background-color: #f8b7d4;
+            color: white;
+            border: none;
+        }
+        .btn-rose-light:hover {
+            background-color: #f48fb1;
+        }
+        .btn-rose-dark {
+            background-color: #c2185b;
+            color: white;
+            border: none;
+        }
+        .btn-rose-dark:hover {
+            background-color: #ad1457;
+        }
+    </style>
 </asp:Content>

@@ -221,6 +221,8 @@
     <Compile Include="App_Start\RouteConfig.vb" />
     <Compile Include="db\dbLogin.vb" />
     <Compile Include="db\dbPersona.vb" />
+    <Compile Include="db\dbPropietario.vb" />
+    <Compile Include="db\dbVehiculo.vb" />
     <Compile Include="Default.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
       <DependentUpon>Default.aspx</DependentUpon>
@@ -247,7 +249,7 @@
     </Compile>
     <Compile Include="FormVehiculo.aspx.vb">
       <DependentUpon>FormVehiculo.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>

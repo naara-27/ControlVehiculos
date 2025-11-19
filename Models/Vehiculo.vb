@@ -1,22 +1,22 @@
 ﻿Public Class Vehiculo
     Private _idVehiculo As Integer
-    Private _idPropietario As Integer
+    Private _placa As String
     Private _marca As String
     Private _modelo As String
-    Private _anio As Integer
-    Private _color As String
-    Private _placa As String
+    Private _idPropietario As Integer
 
+
+    ' Constructor vacío
     Public Sub New()
     End Sub
-    Public Sub New(idVehiculo As Integer, idPropietario As Integer, marca As String, modelo As String, anio As Integer, color As String, placa As String)
+
+    ' Constructor completo
+    Public Sub New(idVehiculo As Integer, placa As String, marca As String, modelo As String, idPropietario As Integer)
         Me.IdVehiculo = idVehiculo
-        Me.IdPropietario = idPropietario
+        Me.Placa = placa
         Me.Marca = marca
         Me.Modelo = modelo
-        Me.Anio = anio
-        Me.Color = color
-        Me.Placa = placa
+        Me.IdPropietario = idPropietario
     End Sub
 
     Public Property IdVehiculo As Integer
@@ -28,12 +28,12 @@
         End Set
     End Property
 
-    Public Property IdPropietario As Integer
+    Public Property Placa As String
         Get
-            Return _idPropietario
+            Return _placa
         End Get
-        Set(value As Integer)
-            _idPropietario = value
+        Set(value As String)
+            _placa = value
         End Set
     End Property
 
@@ -55,30 +55,12 @@
         End Set
     End Property
 
-    Public Property Anio As Integer
+    Public Property IdPropietario As Integer
         Get
-            Return _anio
+            Return _idPropietario
         End Get
         Set(value As Integer)
-            _anio = value
-        End Set
-    End Property
-
-    Public Property Color As String
-        Get
-            Return _color
-        End Get
-        Set(value As String)
-            _color = value
-        End Set
-    End Property
-
-    Public Property Placa As String
-        Get
-            Return _placa
-        End Get
-        Set(value As String)
-            _placa = value
+            _idPropietario = value
         End Set
     End Property
 End Class

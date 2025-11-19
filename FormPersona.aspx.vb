@@ -32,6 +32,7 @@ Public Class FormPersona
             txtApellido2.Text = ""
             txtNacionalidad.Text = ""
             txtfechaNacimiento.Text = ""
+            txtTelefono.Text = ""
 
             gvPersonas.DataBind()
         Catch ex As Exception
