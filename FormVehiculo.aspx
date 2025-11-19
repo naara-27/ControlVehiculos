@@ -36,7 +36,7 @@
 
                 <div class="d-flex gap-2">
                     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-pink text-white fw-semibold" Text="Guardar" OnClick="btnGuardar_Click" />
-                    <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-outline-pink fw-semibold" Text="Actualizar" OnClick= />
+                    <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-outline-pink fw-semibold" Text="Actualizar" OnClick="btnActualizar_Click" />
                 </div>
 
                 <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold text-danger" />

@@ -10,14 +10,14 @@ Public Class FormVehiculo
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
     End Sub
-
-    Protected Sub btn_guardar(sender As Object, e As EventArgs)
+    Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
         Try
 
             vehiculo.Placa = txtPlaca.Text
             vehiculo.Marca = ddlMarca.SelectedValue
             vehiculo.Modelo = ddlModelo.SelectedValue
-            vehiculo.IdPropietario = ""
+
+
 
             Dim mensaje = dbHelper.create(vehiculo)
             If mensaje.Contains("Error") Then
@@ -35,7 +35,6 @@ Public Class FormVehiculo
             lblMensaje.Text = "Error al guardar el vehiculo: " & ex.Message
             SwalUtils.ShowSwalError(Me, "Error al guardar el vehiculo", ex.Message)
         End Try
-
     End Sub
 
     Protected Sub gvVehiculo_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
@@ -97,10 +96,6 @@ Public Class FormVehiculo
         ddlModelo.SelectedValue = row.Cells(5).Text
     End Sub
 
-    Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
-
-    End Sub
-
     Protected Sub btnActualizar_Click(sender As Object, e As EventArgs)
         Dim vehiculo As Vehiculo = New Vehiculo With {
            .Placa = txtPlaca.Text(),
@@ -112,4 +107,5 @@ Public Class FormVehiculo
         gvVehiculo.DataBind()
         gvVehiculo.EditIndex = -1
     End Sub
+
 End Class

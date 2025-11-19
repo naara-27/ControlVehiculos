@@ -1,10 +1,13 @@
 ﻿Imports System.Web.Services.Description
 Imports ControlVehiculos.Utils
+
 Public Class FormPropietario
     Inherits System.Web.UI.Page
+
     Public propietario As New Propietario()
     Protected dbPropietario As New dbPropietario()
     Protected dbVehiculo As New dbVehiculo()
+    Private dbHelper As New DbHelper()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -14,7 +17,10 @@ Public Class FormPropietario
     End Sub
 
     Private Sub CargarPersonas()
-        Dim tabla As DataTable = dbPropietario.Consulta()
+        Dim tabla As DataTable = dbHelper.ExecuteQuery("
+            SELECT IdPersona, CONCAT(Nombre, ' ', Apellido1, ' ', Apellido2) AS NombreCompleto
+            FROM Personas
+        ")
         ddlPersonas.DataSource = tabla
         ddlPersonas.DataTextField = "NombreCompleto"
         ddlPersonas.DataValueField = "IdPersona"
@@ -23,10 +29,13 @@ Public Class FormPropietario
     End Sub
 
     Private Sub CargarVehiculos()
-        Dim tabla As DataTable = dbVehiculo.Consulta()
-        Dim sinPropietario = tabla.Select("IdPropietario IS NULL")
-        If sinPropietario.Length > 0 Then
-            ddlVehiculos.DataSource = sinPropietario.CopyToDataTable()
+        Dim tabla As DataTable = dbHelper.ExecuteQuery("
+            SELECT IdVehiculo, Placa
+            FROM Vehiculos
+            WHERE IdPropietario IS NULL
+        ")
+        If tabla.Rows.Count > 0 Then
+            ddlVehiculos.DataSource = tabla
             ddlVehiculos.DataTextField = "Placa"
             ddlVehiculos.DataValueField = "IdVehiculo"
             ddlVehiculos.DataBind()
@@ -63,7 +72,7 @@ Public Class FormPropietario
         Dim idPropietario = Convert.ToInt32(ultimo("IdPropietario"))
 
         ' Actualizar vehículo con el nuevo propietario
-        Dim vehiculoActualizado As New Vehiculo(idVehiculo, "", "", "", idPropietario)
+        Dim vehiculoActualizado As New Vehiculo(Convert.ToInt32(idVehiculo), "", "", "", idPropietario)
         Dim mensajeVehiculo = dbVehiculo.update(vehiculoActualizado)
 
         If mensajeVehiculo.Contains("Error") Then
@@ -72,6 +81,7 @@ Public Class FormPropietario
             SwalUtils.ShowSwal(Me, "Propietario asignado correctamente")
             ddlPersonas.ClearSelection()
             ddlVehiculos.ClearSelection()
+            CargarVehiculos()
         End If
     End Sub
 End Class
