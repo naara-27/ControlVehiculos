@@ -10,11 +10,10 @@
                 <h4 class="mb-0">Formulario de Vehículo</h4>
             </div>
             <div class="card-body d-flex flex-column gap-3 align-items-center">
-                <!-- ID oculto porque es autogenerado -->
 
                 <asp:TextBox ID="txtPlaca" CssClass="form-control border-pink text-center" placeholder="Placa" runat="server" />
 
-                <!-- Marca como DropDownList -->
+                <!-- Marca -->
                 <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select border-pink text-center">
                     <asp:ListItem Text="Seleccione una marca" Value="" />
                     <asp:ListItem Text="Toyota" Value="Toyota" />
@@ -24,7 +23,7 @@
                     <asp:ListItem Text="Nissan" Value="Nissan" />
                 </asp:DropDownList>
 
-                <!-- Modelo como DropDownList -->
+                <!-- Modelo -->
                 <asp:DropDownList ID="ddlModelo" runat="server" CssClass="form-select border-pink text-center">
                     <asp:ListItem Text="Seleccione un modelo" Value="" />
                     <asp:ListItem Text="Sedán" Value="Sedán" />
@@ -34,9 +33,14 @@
                     <asp:ListItem Text="Van" Value="Van" />
                 </asp:DropDownList>
 
+                <%-- Propietario --%>
+                <asp:DropDownList ID="ddlPropietario" runat="server" CssClass="form-select border-pink text-center">
+                    <asp:ListItem Text="Seleccione propietario" Value="" />
+                </asp:DropDownList>
+
                 <div class="d-flex gap-2">
                     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-pink text-white fw-semibold" Text="Guardar" OnClick="btnGuardar_Click" />
-                    <asp:Button ID="btnActualizar" runat="server" CssClass="btn btn-outline-pink fw-semibold" Text="Actualizar" OnClick="btnActualizar_Click" />
+                    
                 </div>
 
                 <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold text-danger" />
@@ -68,6 +72,34 @@
         </asp:GridView>
     </div>
 
+
+    <div class="container mt-4">
+    <h5 class="text-center fw-semibold mb-3" style="color: #d63384;">Personas con vehículo asignado</h5>
+   
+        <asp:GridView ID="gvAsignados" runat="server"
+    AutoGenerateColumns="False"
+    ShowHeaderWhenEmpty="True"
+    EmptyDataText="No hay propietarios con vehículo asignado."
+    CssClass="table table-striped table-hover border border-pink"
+    DataKeyNames="IdPropietario"
+    OnRowEditing="gvAsignados_RowEditing"
+    OnRowUpdating="gvAsignados_RowUpdating"
+    OnRowCancelingEdit="gvAsignados_RowCancelingEdit"
+    OnRowDeleting="gvAsignados_RowDeleting">
+    <Columns>
+        <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
+        <asp:BoundField DataField="IdPropietario" HeaderText="ID" ReadOnly="True" SortExpression="IdPropietario" />
+        <asp:BoundField DataField="NombreCompleto" HeaderText="Propietario" SortExpression="NombreCompleto" ReadOnly="True" />
+        <asp:BoundField DataField="Placa" HeaderText="Placa" SortExpression="Placa" ReadOnly="True" />
+        <asp:BoundField DataField="Marca" HeaderText="Marca" SortExpression="Marca" />
+        <asp:BoundField DataField="Modelo" HeaderText="Modelo" SortExpression="Modelo" />
+        <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
+    </Columns>
+</asp:GridView>
+
+</div>
+
+
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -76,37 +108,45 @@
         .border-pink {
             border: 1px solid #d63384 !important;
         }
+
         .btn-pink {
             background-color: #d63384;
             border: none;
         }
-        .btn-pink:hover {
-            background-color: #c2185b;
-        }
+
+            .btn-pink:hover {
+                background-color: #c2185b;
+            }
+
         .btn-outline-pink {
             border: 1px solid #d63384;
             color: #d63384;
             background-color: transparent;
         }
-        .btn-outline-pink:hover {
-            background-color: #d63384;
-            color: white;
-        }
+
+            .btn-outline-pink:hover {
+                background-color: #d63384;
+                color: white;
+            }
+
         .btn-rose-light {
             background-color: #f8b7d4;
             color: white;
             border: none;
         }
-        .btn-rose-light:hover {
-            background-color: #f48fb1;
-        }
+
+            .btn-rose-light:hover {
+                background-color: #f48fb1;
+            }
+
         .btn-rose-dark {
             background-color: #c2185b;
             color: white;
             border: none;
         }
-        .btn-rose-dark:hover {
-            background-color: #ad1457;
-        }
+
+            .btn-rose-dark:hover {
+                background-color: #ad1457;
+            }
     </style>
 </asp:Content>

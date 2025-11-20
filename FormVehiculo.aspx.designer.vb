@@ -50,6 +50,15 @@ Partial Public Class FormVehiculo
     Protected WithEvents ddlModelo As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control ddlPropietario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ddlPropietario As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control btnGuardar.
     '''</summary>
     '''<remarks>
@@ -57,15 +66,6 @@ Partial Public Class FormVehiculo
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control btnActualizar.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnActualizar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control lblMensaje.
@@ -84,4 +84,13 @@ Partial Public Class FormVehiculo
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvVehiculo As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control gvAsignados.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvAsignados As Global.System.Web.UI.WebControls.GridView
 End Class

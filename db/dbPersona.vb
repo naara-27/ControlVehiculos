@@ -68,4 +68,20 @@ Public Class dbPersona
             Return New DataTable()
         End Try
     End Function
+
+    Public Function ConsultaActivas() As DataTable
+        Try
+            Dim sql As String = "
+            SELECT 
+                IdPersona, 
+                RTRIM(LTRIM(Nombre)) + ' ' + RTRIM(LTRIM(Apellido1)) + ' ' + RTRIM(LTRIM(Apellido2)) AS NombreCompleto
+            FROM 
+                Personas
+            ORDER BY 
+                NombreCompleto ASC"
+            Return dbHelper.ExecuteQuery(sql)
+        Catch ex As Exception
+            Return New DataTable()
+        End Try
+    End Function
 End Class

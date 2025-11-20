@@ -1,18 +1,14 @@
-﻿Imports System.Web.Services.Description
-Imports ControlVehiculos.Utils
+﻿Imports ControlVehiculos.Utils
 
 Public Class FormPropietario
     Inherits System.Web.UI.Page
 
-    Public propietario As New Propietario()
     Protected dbPropietario As New dbPropietario()
-    Protected dbVehiculo As New dbVehiculo()
     Private dbHelper As New DbHelper()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
             CargarPersonas()
-            CargarVehiculos()
         End If
     End Sub
 
@@ -28,60 +24,49 @@ Public Class FormPropietario
         ddlPersonas.Items.Insert(0, New ListItem("Seleccione una persona", ""))
     End Sub
 
-    Private Sub CargarVehiculos()
-        Dim tabla As DataTable = dbHelper.ExecuteQuery("
-            SELECT IdVehiculo, Placa
-            FROM Vehiculos
-            WHERE IdPropietario IS NULL
-        ")
-        If tabla.Rows.Count > 0 Then
-            ddlVehiculos.DataSource = tabla
-            ddlVehiculos.DataTextField = "Placa"
-            ddlVehiculos.DataValueField = "IdVehiculo"
-            ddlVehiculos.DataBind()
-        Else
-            ddlVehiculos.Items.Clear()
+    Protected Sub ddlPersonas_SelectedIndexChanged(sender As Object, e As EventArgs)
+        If ddlPersonas.SelectedValue = "" Then
+            LimpiarCampos()
+            Return
         End If
-        ddlVehiculos.Items.Insert(0, New ListItem("Seleccione un vehículo", ""))
+
+        Dim idPersona As Integer = Convert.ToInt32(ddlPersonas.SelectedValue)
+        Dim dt As DataTable = dbPropietario.ConsultaPorPersona(idPersona)
+
+        If dt.Rows.Count > 0 Then
+            Dim row = dt.Rows(0)
+            txtNombre.Text = row("Nombre").ToString()
+            txtApellido1.Text = row("Apellido1").ToString()
+            txtApellido2.Text = row("Apellido2").ToString()
+            txtNacionalidad.Text = row("Nacionalidad").ToString()
+            txtFechaNacimiento.Text = Convert.ToDateTime(row("FechaNacimiento")).ToString("yyyy-MM-dd")
+            txtTelefono.Text = row("Telefono").ToString()
+
+            If String.IsNullOrEmpty(row("Placa").ToString()) Then
+                txtPlaca.Text = ""
+                txtMarca.Text = ""
+                txtModelo.Text = ""
+                SwalUtils.ShowSwalError(Me, "Sin vehículo", "Esta persona no tiene vehículo asignado.")
+            Else
+                txtPlaca.Text = row("Placa").ToString()
+                txtMarca.Text = row("Marca").ToString()
+                txtModelo.Text = row("Modelo").ToString()
+            End If
+        Else
+            LimpiarCampos()
+            SwalUtils.ShowSwalError(Me, "Sin datos", "No se encontró información para esta persona.")
+        End If
     End Sub
 
-    Protected Sub btnAsignar_Click(sender As Object, e As EventArgs)
-        Dim idPersona = ddlPersonas.SelectedValue
-        Dim idVehiculo = ddlVehiculos.SelectedValue
-
-        If idPersona = "" OrElse idVehiculo = "" Then
-            SwalUtils.ShowSwalError(Me, "Campos incompletos", "Debe seleccionar una persona y un vehículo.")
-            Return
-        End If
-
-        ' Crear propietario
-        Dim mensajePropietario = dbPropietario.create(Convert.ToInt32(idPersona))
-        If mensajePropietario.Contains("Error") Then
-            SwalUtils.ShowSwalError(Me, "Error al registrar propietario", mensajePropietario)
-            Return
-        End If
-
-        ' Obtener el último IdPropietario creado
-        Dim propietarios = dbPropietario.Consulta()
-        Dim ultimo = propietarios.Select("IdPersona = " & idPersona).LastOrDefault()
-        If ultimo Is Nothing Then
-            SwalUtils.ShowSwalError(Me, "Error", "No se pudo recuperar el propietario recién creado.")
-            Return
-        End If
-
-        Dim idPropietario = Convert.ToInt32(ultimo("IdPropietario"))
-
-        ' Actualizar vehículo con el nuevo propietario
-        Dim vehiculoActualizado As New Vehiculo(Convert.ToInt32(idVehiculo), "", "", "", idPropietario)
-        Dim mensajeVehiculo = dbVehiculo.update(vehiculoActualizado)
-
-        If mensajeVehiculo.Contains("Error") Then
-            SwalUtils.ShowSwalError(Me, "Error al asignar vehículo", mensajeVehiculo)
-        Else
-            SwalUtils.ShowSwal(Me, "Propietario asignado correctamente")
-            ddlPersonas.ClearSelection()
-            ddlVehiculos.ClearSelection()
-            CargarVehiculos()
-        End If
+    Private Sub LimpiarCampos()
+        txtNombre.Text = ""
+        txtApellido1.Text = ""
+        txtApellido2.Text = ""
+        txtNacionalidad.Text = ""
+        txtFechaNacimiento.Text = ""
+        txtTelefono.Text = ""
+        txtPlaca.Text = ""
+        txtMarca.Text = ""
+        txtModelo.Text = ""
     End Sub
 End Class

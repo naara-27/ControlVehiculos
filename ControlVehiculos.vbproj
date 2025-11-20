@@ -242,7 +242,7 @@
     </Compile>
     <Compile Include="FormPropietario.aspx.vb">
       <DependentUpon>FormPropietario.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="FormVehiculo.aspx.designer.vb">
       <DependentUpon>FormVehiculo.aspx</DependentUpon>
