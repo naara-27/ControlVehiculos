@@ -30,8 +30,8 @@
                         <asp:BoundField DataField="Placa" HeaderText="Placa" />
                         <asp:BoundField DataField="Marca" HeaderText="Marca" />
                         <asp:BoundField DataField="Modelo" HeaderText="Modelo" />
-                        
-                        <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar Vehiculo" ControlStyle-CssClass="btn btn-warning" />
+                        <%-- Aquí solo se elimina el vehículo desde la vista de propietario --%>
+                        <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" ControlStyle-CssClass="btn btn-warning" />
                     </Columns>
                 </asp:GridView>
 
@@ -42,7 +42,7 @@
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Estilos rosados -->
+    <!-- Estilos rosados personalizados -->
     <style>
         .border-pink { border: 1px solid #d63384 !important; }
         .btn-pink { background-color: #d63384; border: none; }

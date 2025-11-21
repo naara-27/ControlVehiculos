@@ -6,7 +6,7 @@ Public Class FormPropietario
 
     Protected dbPropietario As New dbPropietario()
     Private dbHelper As New DbHelper()
-    Private dbVehiculoHelper As New dbVehiculo()
+    Private dbVehiculoHelper As New dbVehiculo() ' 🔹 para eliminar vehículos
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -46,6 +46,7 @@ Public Class FormPropietario
         End If
     End Sub
 
+    ' 🔹 Eliminar directamente el vehículo desde la vista de propietario
     Protected Sub gvVehiculosPersona_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
             Dim idVehiculo As Integer = Convert.ToInt32(gvVehiculosPersona.DataKeys(e.RowIndex).Value)
