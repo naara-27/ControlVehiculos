@@ -77,20 +77,11 @@ Partial Public Class FormVehiculo
     Protected WithEvents lblMensaje As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control gvVehiculo.
+    '''Control gvVehiculos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gvVehiculo As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
-    '''Control gvAsignados.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents gvAsignados As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents gvVehiculos As Global.System.Web.UI.WebControls.GridView
 End Class

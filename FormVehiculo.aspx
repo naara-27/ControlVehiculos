@@ -13,7 +13,6 @@
 
                 <asp:TextBox ID="txtPlaca" CssClass="form-control border-pink text-center" placeholder="Placa" runat="server" />
 
-                <!-- Marca -->
                 <asp:DropDownList ID="ddlMarca" runat="server" CssClass="form-select border-pink text-center">
                     <asp:ListItem Text="Seleccione una marca" Value="" />
                     <asp:ListItem Text="Toyota" Value="Toyota" />
@@ -23,7 +22,6 @@
                     <asp:ListItem Text="Nissan" Value="Nissan" />
                 </asp:DropDownList>
 
-                <!-- Modelo -->
                 <asp:DropDownList ID="ddlModelo" runat="server" CssClass="form-select border-pink text-center">
                     <asp:ListItem Text="Seleccione un modelo" Value="" />
                     <asp:ListItem Text="Sedán" Value="Sedán" />
@@ -33,120 +31,52 @@
                     <asp:ListItem Text="Van" Value="Van" />
                 </asp:DropDownList>
 
-                <%-- Propietario --%>
                 <asp:DropDownList ID="ddlPropietario" runat="server" CssClass="form-select border-pink text-center">
                     <asp:ListItem Text="Seleccione propietario" Value="" />
                 </asp:DropDownList>
 
                 <div class="d-flex gap-2">
                     <asp:Button ID="btnGuardar" runat="server" CssClass="btn btn-pink text-white fw-semibold" Text="Guardar" OnClick="btnGuardar_Click" />
-                    
                 </div>
 
                 <asp:Label ID="lblMensaje" runat="server" CssClass="fw-bold text-danger" />
             </div>
         </div>
     </div>
-
-    <div class="container mt-4">
-        <asp:GridView ID="gvVehiculo" runat="server"
-            AutoGenerateColumns="False"
-            ShowHeaderWhenEmpty="True"
-            EmptyDataText="No hay vehículos registrados."
-            CssClass="table table-striped table-hover border border-pink"
-            DataKeyNames="IdVehiculo"
-            OnRowDeleting="gvVehiculo_RowDeleting"
-            OnRowEditing="gvVehiculo_RowEditing"
-            OnRowCancelingEdit="gvVehiculo_RowCancelingEdit"
-            OnRowUpdating="gvVehiculo_RowUpdating"
-            OnSelectedIndexChanged="gvVehiculo_SelectedIndexChanged">
-            <Columns>
-                <asp:CommandField ShowSelectButton="True" ControlStyle-CssClass="btn btn-rose-light" />
-                <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
-                <asp:BoundField DataField="IdVehiculo" HeaderText="ID" ReadOnly="True" SortExpression="IdVehiculo" />
-                <asp:BoundField DataField="Placa" HeaderText="Placa" SortExpression="Placa" />
-                <asp:BoundField DataField="Marca" HeaderText="Marca" SortExpression="Marca" />
-                <asp:BoundField DataField="Modelo" HeaderText="Modelo" SortExpression="Modelo" />
-                <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
-            </Columns>
-        </asp:GridView>
-    </div>
-
-
-    <div class="container mt-4">
-    <h5 class="text-center fw-semibold mb-3" style="color: #d63384;">Personas con vehículo asignado</h5>
-   
-        <asp:GridView ID="gvAsignados" runat="server"
+      <asp:GridView ID="gvVehiculos" runat="server"
     AutoGenerateColumns="False"
     ShowHeaderWhenEmpty="True"
-    EmptyDataText="No hay propietarios con vehículo asignado."
+    EmptyDataText="No hay vehículos registrados."
     CssClass="table table-striped table-hover border border-pink"
-    DataKeyNames="IdPropietario"
-    OnRowEditing="gvAsignados_RowEditing"
-    OnRowUpdating="gvAsignados_RowUpdating"
-    OnRowCancelingEdit="gvAsignados_RowCancelingEdit"
-    OnRowDeleting="gvAsignados_RowDeleting">
+    DataKeyNames="IdVehiculo"
+    OnRowEditing="gvVehiculos_RowEditing"
+    OnRowUpdating="gvVehiculos_RowUpdating"
+    OnRowCancelingEdit="gvVehiculos_RowCancelingEdit"
+    OnRowDeleting="gvVehiculos_RowDeleting">
     <Columns>
         <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
-        <asp:BoundField DataField="IdPropietario" HeaderText="ID" ReadOnly="True" SortExpression="IdPropietario" />
-        <asp:BoundField DataField="NombreCompleto" HeaderText="Propietario" SortExpression="NombreCompleto" ReadOnly="True" />
-        <asp:BoundField DataField="Placa" HeaderText="Placa" SortExpression="Placa" ReadOnly="True" />
-        <asp:BoundField DataField="Marca" HeaderText="Marca" SortExpression="Marca" />
-        <asp:BoundField DataField="Modelo" HeaderText="Modelo" SortExpression="Modelo" />
-        <asp:CommandField ShowDeleteButton="True" ControlStyle-CssClass="btn btn-danger" />
+        <asp:BoundField DataField="IdVehiculo" HeaderText="ID" ReadOnly="True" />
+        <asp:BoundField DataField="Placa" HeaderText="Placa" />
+        <asp:BoundField DataField="Marca" HeaderText="Marca" />
+        <asp:BoundField DataField="Modelo" HeaderText="Modelo" />
+        <asp:BoundField DataField="NombrePropietario" HeaderText="Propietario" ReadOnly="True" />
+        <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar / Desasignar" ControlStyle-CssClass="btn btn-danger" />
     </Columns>
 </asp:GridView>
-
-</div>
-
 
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Estilos rosados personalizados -->
     <style>
-        .border-pink {
-            border: 1px solid #d63384 !important;
-        }
-
-        .btn-pink {
-            background-color: #d63384;
-            border: none;
-        }
-
-            .btn-pink:hover {
-                background-color: #c2185b;
-            }
-
-        .btn-outline-pink {
-            border: 1px solid #d63384;
-            color: #d63384;
-            background-color: transparent;
-        }
-
-            .btn-outline-pink:hover {
-                background-color: #d63384;
-                color: white;
-            }
-
-        .btn-rose-light {
-            background-color: #f8b7d4;
-            color: white;
-            border: none;
-        }
-
-            .btn-rose-light:hover {
-                background-color: #f48fb1;
-            }
-
-        .btn-rose-dark {
-            background-color: #c2185b;
-            color: white;
-            border: none;
-        }
-
-            .btn-rose-dark:hover {
-                background-color: #ad1457;
-            }
+        .border-pink { border: 1px solid #d63384 !important; }
+        .btn-pink { background-color: #d63384; border: none; }
+        .btn-pink:hover { background-color: #c2185b; }
+        .btn-outline-pink { border: 1px solid #d63384; color: #d63384; background-color: transparent; }
+        .btn-outline-pink:hover { background-color: #d63384; color: white; }
+        .btn-rose-light { background-color: #f8b7d4; color: white; border: none; }
+        .btn-rose-light:hover { background-color: #f48fb1; }
+        .btn-rose-dark { background-color: #c2185b; color: white; border: none; }
+        .btn-rose-dark:hover { background-color: #ad1457; }
     </style>
 </asp:Content>

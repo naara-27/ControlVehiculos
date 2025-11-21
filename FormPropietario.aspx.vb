@@ -1,10 +1,12 @@
 ﻿Imports ControlVehiculos.Utils
+Imports ControlVehiculos.dbVehiculo
 
 Public Class FormPropietario
     Inherits System.Web.UI.Page
 
     Protected dbPropietario As New dbPropietario()
     Private dbHelper As New DbHelper()
+    Private dbVehiculoHelper As New dbVehiculo()
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
@@ -26,7 +28,8 @@ Public Class FormPropietario
 
     Protected Sub ddlPersonas_SelectedIndexChanged(sender As Object, e As EventArgs)
         If ddlPersonas.SelectedValue = "" Then
-            LimpiarCampos()
+            gvVehiculosPersona.DataSource = Nothing
+            gvVehiculosPersona.DataBind()
             Return
         End If
 
@@ -34,39 +37,29 @@ Public Class FormPropietario
         Dim dt As DataTable = dbPropietario.ConsultaPorPersona(idPersona)
 
         If dt.Rows.Count > 0 Then
-            Dim row = dt.Rows(0)
-            txtNombre.Text = row("Nombre").ToString()
-            txtApellido1.Text = row("Apellido1").ToString()
-            txtApellido2.Text = row("Apellido2").ToString()
-            txtNacionalidad.Text = row("Nacionalidad").ToString()
-            txtFechaNacimiento.Text = Convert.ToDateTime(row("FechaNacimiento")).ToString("yyyy-MM-dd")
-            txtTelefono.Text = row("Telefono").ToString()
-
-            If String.IsNullOrEmpty(row("Placa").ToString()) Then
-                txtPlaca.Text = ""
-                txtMarca.Text = ""
-                txtModelo.Text = ""
-                SwalUtils.ShowSwalError(Me, "Sin vehículo", "Esta persona no tiene vehículo asignado.")
-            Else
-                txtPlaca.Text = row("Placa").ToString()
-                txtMarca.Text = row("Marca").ToString()
-                txtModelo.Text = row("Modelo").ToString()
-            End If
+            gvVehiculosPersona.DataSource = dt
+            gvVehiculosPersona.DataBind()
         Else
-            LimpiarCampos()
+            gvVehiculosPersona.DataSource = Nothing
+            gvVehiculosPersona.DataBind()
             SwalUtils.ShowSwalError(Me, "Sin datos", "No se encontró información para esta persona.")
         End If
     End Sub
 
-    Private Sub LimpiarCampos()
-        txtNombre.Text = ""
-        txtApellido1.Text = ""
-        txtApellido2.Text = ""
-        txtNacionalidad.Text = ""
-        txtFechaNacimiento.Text = ""
-        txtTelefono.Text = ""
-        txtPlaca.Text = ""
-        txtMarca.Text = ""
-        txtModelo.Text = ""
+    Protected Sub gvVehiculosPersona_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
+        Try
+            Dim idVehiculo As Integer = Convert.ToInt32(gvVehiculosPersona.DataKeys(e.RowIndex).Value)
+            Dim mensaje = dbVehiculoHelper.delete(idVehiculo)
+
+            If mensaje.Contains("Error") Then
+                SwalUtils.ShowSwalError(Me, "Error al eliminar", mensaje)
+            Else
+                SwalUtils.ShowSwal(Me, "Vehículo eliminado correctamente")
+            End If
+
+            ddlPersonas_SelectedIndexChanged(Nothing, Nothing)
+        Catch ex As Exception
+            SwalUtils.ShowSwalError(Me, "Error inesperado", ex.Message)
+        End Try
     End Sub
 End Class

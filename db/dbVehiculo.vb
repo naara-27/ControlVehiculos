@@ -57,11 +57,14 @@ Public Class dbVehiculo
         Try
             Dim sql As String = "
                 SELECT 
-                    v.*, 
-                    CONCAT(p.Nombre, ' ', p.Apellido1, ' ', p.Apellido2) AS NombrePropietario
+                    v.IdVehiculo,
+                    v.Placa,
+                    v.Marca,
+                    v.Modelo,
+                    ISNULL(CONCAT(p.Nombre, ' ', p.Apellido1, ' ', p.Apellido2), '') AS NombrePropietario
                 FROM Vehiculos v
-                INNER JOIN Propietarios pr ON v.IdPropietario = pr.IdPropietario
-                INNER JOIN Personas p ON pr.IdPersona = p.IdPersona"
+                LEFT JOIN Propietarios pr ON v.IdPropietario = pr.IdPropietario
+                LEFT JOIN Personas p ON pr.IdPersona = p.IdPersona"
             Return dbHelper.ExecuteQuery(sql)
         Catch ex As Exception
             Return New DataTable()
@@ -71,9 +74,15 @@ Public Class dbVehiculo
     Public Function ConsultaPorPersona(idPersona As Integer) As DataTable
         Try
             Dim sql As String = "
-                SELECT v.IdVehiculo, v.Placa, v.Marca, v.Modelo
+                SELECT 
+                    v.IdVehiculo, 
+                    v.Placa, 
+                    v.Marca, 
+                    v.Modelo,
+                    CONCAT(pe.Nombre, ' ', pe.Apellido1, ' ', pe.Apellido2) AS NombrePropietario
                 FROM Vehiculos v
                 INNER JOIN Propietarios p ON v.IdPropietario = p.IdPropietario
+                INNER JOIN Personas pe ON p.IdPersona = pe.IdPersona
                 WHERE p.IdPersona = @IdPersona"
             Dim parametros As New List(Of SqlParameter) From {
                 New SqlParameter("@IdPersona", idPersona)
@@ -102,14 +111,14 @@ Public Class dbVehiculo
         End Try
     End Function
 
-    Public Function DesasignarVehiculo(idPropietario As Integer) As String
+    Public Function DesasignarVehiculo(idVehiculo As Integer) As String
         Try
             Dim sql As String = "
                 UPDATE Vehiculos 
                 SET IdPropietario = NULL 
-                WHERE IdPropietario = @IdPropietario"
+                WHERE IdVehiculo = @IdVehiculo"
             Dim parametros As New List(Of SqlParameter) From {
-                New SqlParameter("@IdPropietario", idPropietario)
+                New SqlParameter("@IdVehiculo", idVehiculo)
             }
             dbHelper.ExecuteNonQuery(sql, parametros)
             Return "Vehículo desasignado"
@@ -117,5 +126,4 @@ Public Class dbVehiculo
             Return "Error al desasignar vehículo: " & ex.Message
         End Try
     End Function
-
 End Class
