@@ -130,24 +130,12 @@ Public Class FormVehiculo
     Protected Sub gvVehiculos_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
         Try
             Dim idVehiculo As Integer = Convert.ToInt32(gvVehiculos.DataKeys(e.RowIndex).Value)
-            Dim row As GridViewRow = gvVehiculos.Rows(e.RowIndex)
-
-            ' Validar si tiene propietario
-            Dim nombrePropietario As String = row.Cells(5).Text.Trim()
-            Dim tienePropietario As Boolean = Not String.IsNullOrEmpty(nombrePropietario) AndAlso nombrePropietario <> "&nbsp;"
-
-            Dim mensaje As String
-            If tienePropietario Then
-                mensaje = dbHelper.DesasignarVehiculo(idVehiculo)
-            Else
-                mensaje = dbHelper.delete(idVehiculo)
-            End If
+            Dim mensaje As String = dbHelper.delete(idVehiculo)
 
             If mensaje.Contains("Error") Then
-                SwalUtils.ShowSwalError(Me, "Acción fallida", mensaje)
+                SwalUtils.ShowSwalError(Me, "Error al eliminar", mensaje)
             Else
-                Dim accion = If(tienePropietario, "desasignado", "eliminado")
-                SwalUtils.ShowSwal(Me, $"Vehículo {accion} correctamente")
+                SwalUtils.ShowSwal(Me, "Vehículo eliminado correctamente")
             End If
 
             CargarVehiculos()

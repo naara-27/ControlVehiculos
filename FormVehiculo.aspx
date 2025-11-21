@@ -43,26 +43,27 @@
             </div>
         </div>
     </div>
-      <asp:GridView ID="gvVehiculos" runat="server"
-    AutoGenerateColumns="False"
-    ShowHeaderWhenEmpty="True"
-    EmptyDataText="No hay vehículos registrados."
-    CssClass="table table-striped table-hover border border-pink"
-    DataKeyNames="IdVehiculo"
-    OnRowEditing="gvVehiculos_RowEditing"
-    OnRowUpdating="gvVehiculos_RowUpdating"
-    OnRowCancelingEdit="gvVehiculos_RowCancelingEdit"
-    OnRowDeleting="gvVehiculos_RowDeleting">
-    <Columns>
-        <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
-        <asp:BoundField DataField="IdVehiculo" HeaderText="ID" ReadOnly="True" />
-        <asp:BoundField DataField="Placa" HeaderText="Placa" />
-        <asp:BoundField DataField="Marca" HeaderText="Marca" />
-        <asp:BoundField DataField="Modelo" HeaderText="Modelo" />
-        <asp:BoundField DataField="NombrePropietario" HeaderText="Propietario" ReadOnly="True" />
-        <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar / Desasignar" ControlStyle-CssClass="btn btn-danger" />
-    </Columns>
-</asp:GridView>
+
+    <asp:GridView ID="gvVehiculos" runat="server"
+        AutoGenerateColumns="False"
+        ShowHeaderWhenEmpty="True"
+        EmptyDataText="No hay vehículos registrados."
+        CssClass="table table-striped table-hover border border-pink"
+        DataKeyNames="IdVehiculo"
+        OnRowEditing="gvVehiculos_RowEditing"
+        OnRowUpdating="gvVehiculos_RowUpdating"
+        OnRowCancelingEdit="gvVehiculos_RowCancelingEdit"
+        OnRowDeleting="gvVehiculos_RowDeleting">
+        <Columns>
+            <asp:CommandField ShowEditButton="True" ControlStyle-CssClass="btn btn-rose-dark" />
+            <asp:BoundField DataField="IdVehiculo" HeaderText="ID" ReadOnly="True" />
+            <asp:BoundField DataField="Placa" HeaderText="Placa" />
+            <asp:BoundField DataField="Marca" HeaderText="Marca" />
+            <asp:BoundField DataField="Modelo" HeaderText="Modelo" />
+            <asp:BoundField DataField="NombrePropietario" HeaderText="Propietario" ReadOnly="True" />
+            <asp:CommandField ShowDeleteButton="True" DeleteText="Eliminar" ControlStyle-CssClass="btn btn-danger" />
+        </Columns>
+    </asp:GridView>
 
     <!-- SweetAlert Script -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -79,4 +80,5 @@
         .btn-rose-dark { background-color: #c2185b; color: white; border: none; }
         .btn-rose-dark:hover { background-color: #ad1457; }
     </style>
+
 </asp:Content>
