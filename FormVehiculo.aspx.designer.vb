@@ -23,6 +23,15 @@ Partial Public Class FormVehiculo
     Protected WithEvents editando As Global.System.Web.UI.WebControls.HiddenField
 
     '''<summary>
+    '''Control panelFormulario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents panelFormulario As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
     '''Control txtPlaca.
     '''</summary>
     '''<remarks>

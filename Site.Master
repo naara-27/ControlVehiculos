@@ -15,14 +15,11 @@
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-
 </head>
 <body>
     <form runat="server">
         <asp:ScriptManager runat="server">
             <Scripts>
-                <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
-                <%--Framework Scripts--%>
                 <asp:ScriptReference Name="MsAjaxBundle" />
                 <asp:ScriptReference Name="jquery" />
                 <asp:ScriptReference Name="WebForms.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebForms.js" />
@@ -34,7 +31,6 @@
                 <asp:ScriptReference Name="WebParts.js" Assembly="System.Web" Path="~/Scripts/WebForms/WebParts.js" />
                 <asp:ScriptReference Name="Focus.js" Assembly="System.Web" Path="~/Scripts/WebForms/Focus.js" />
                 <asp:ScriptReference Name="WebFormsBundle" />
-                <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
 
@@ -47,25 +43,26 @@
                 </button>
                 <div class="collapse navbar-collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <% If (Autenticado = False) Then  %>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Log In </a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Registro.aspx">Registro</a></li>
-                        <%End If %> 
-                        <li class="nav-item" runat="server" id="liAdmin"><a class="nav-link" runat="server" href="~/Admin">Admin</a></li>                        
-                        <% If (Autenticado) Then  %>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/Home">Inicio</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/FormPropietario">Propietario</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/FormVehiculo">Vehiculo</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server" href="~/FormPersona">Persona</a></li>
-                        <li class="nav-item"><a class="nav-link" runat="server">
-                            <asp:Button ID="LogOut" OnClick="LogOut_Click" runat="server" Text="Cerrar Sesión" CssClass="btn btn-danger btn-sm" />
-                        </a></li>
-                        <%End If %> 
+                        <% If (Autenticado = False) Then %>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Login.aspx">Log In</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server" href="~/Registro.aspx">Registro</a></li>
+                        <% End If %>
 
+                        <% If (Autenticado) Then %>
+                            <li class="nav-item" runat="server" id="liInicio"><a class="nav-link" runat="server" href="~/Home">Inicio</a></li>
+                            <li class="nav-item" runat="server" id="liAdmin"><a class="nav-link" runat="server" href="~/Admin">Admin</a></li>
+                            <li class="nav-item" runat="server" id="liPropietario"><a class="nav-link" runat="server" href="~/FormPropietario">Propietario</a></li>
+                            <li class="nav-item" runat="server" id="liPersona"><a class="nav-link" runat="server" href="~/FormPersona">Persona</a></li>
+                            <li class="nav-item" runat="server" id="liVehiculo"><a class="nav-link" runat="server" href="~/FormVehiculo">Vehiculo</a></li>
+                            <li class="nav-item"><a class="nav-link" runat="server">
+                                <asp:Button ID="LogOut" OnClick="LogOut_Click" runat="server" Text="Cerrar Sesión" CssClass="btn btn-danger btn-sm" />
+                            </a></li>
+                        <% End If %>
                     </ul>
                 </div>
             </div>
         </nav>
+
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

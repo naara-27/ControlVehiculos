@@ -10,18 +10,31 @@ Public Class FormVehiculo
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
         If Not IsPostBack Then
-            Dim dbPersona As New dbPersona()
-            Dim dt As DataTable = dbPersona.ConsultaActivas()
-            ddlPropietario.DataSource = dt
-            ddlPropietario.DataTextField = "NombreCompleto"
-            ddlPropietario.DataValueField = "IdPersona"
-            ddlPropietario.DataBind()
-            ddlPropietario.Items.Insert(0, New ListItem("Seleccione propietario", ""))
+            Dim tipoUsuario As Integer = Convert.ToInt32(Session("Usuario").Rol)
+
+            If tipoUsuario = 2 Then
+                ' Solo administrador carga propietarios
+                Dim dbPersona As New dbPersona()
+                Dim dt As DataTable = dbPersona.ConsultaActivas()
+                ddlPropietario.DataSource = dt
+                ddlPropietario.DataTextField = "NombreCompleto"
+                ddlPropietario.DataValueField = "IdPersona"
+                ddlPropietario.DataBind()
+                ddlPropietario.Items.Insert(0, New ListItem("Seleccione propietario", ""))
+            Else
+                ' Usuario normal: oculta formulario completo
+                panelFormulario.Visible = False
+                gvVehiculos.Columns(0).Visible = False ' Oculta botón Editar
+                gvVehiculos.Columns(6).Visible = False ' Oculta botón Eliminar
+            End If
+
             CargarVehiculos()
         End If
     End Sub
 
     Protected Sub btnGuardar_Click(sender As Object, e As EventArgs)
+        If Convert.ToInt32(Session("Usuario").Rol) <> 2 Then Exit Sub
+
         Try
             If String.IsNullOrEmpty(ddlPropietario.SelectedValue) Then
                 SwalUtils.ShowSwalError(Me, "Error", "Debe seleccionar una persona para convertirla en propietario")
@@ -88,6 +101,7 @@ Public Class FormVehiculo
     End Sub
 
     Protected Sub gvVehiculos_RowEditing(sender As Object, e As GridViewEditEventArgs)
+        If Convert.ToInt32(Session("Usuario").Rol) <> 2 Then Exit Sub
         gvVehiculos.EditIndex = e.NewEditIndex
         CargarVehiculos()
     End Sub
@@ -98,6 +112,8 @@ Public Class FormVehiculo
     End Sub
 
     Protected Sub gvVehiculos_RowUpdating(sender As Object, e As GridViewUpdateEventArgs)
+        If Convert.ToInt32(Session("Usuario").Rol) <> 2 Then Exit Sub
+
         Try
             Dim idVehiculo As Integer = Convert.ToInt32(gvVehiculos.DataKeys(e.RowIndex).Value)
             Dim row As GridViewRow = gvVehiculos.Rows(e.RowIndex)
@@ -128,6 +144,8 @@ Public Class FormVehiculo
     End Sub
 
     Protected Sub gvVehiculos_RowDeleting(sender As Object, e As GridViewDeleteEventArgs)
+        If Convert.ToInt32(Session("Usuario").Rol) <> 2 Then Exit Sub
+
         Try
             Dim idVehiculo As Integer = Convert.ToInt32(gvVehiculos.DataKeys(e.RowIndex).Value)
             Dim mensaje As String = dbHelper.delete(idVehiculo)
