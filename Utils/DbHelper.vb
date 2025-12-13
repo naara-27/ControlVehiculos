@@ -5,7 +5,7 @@ Public Class DbHelper
 
 
     Public Sub New()
-        EnsureErrorLogTableExists() ' Asegúrate de que la tabla exista al crear una instancia.
+        '  EnsureErrorLogTableExists() ' Asegúrate de que la tabla exista al crear una instancia.
     End Sub
 
     ' Método para obtener la conexión
@@ -98,6 +98,7 @@ Public Class DbHelper
 
     ' Método para registrar errores en una tabla de auditoría.
     Private Sub LogError(ex As Exception, Optional query As String = "")
+        EnsureErrorLogTableExists() ' Asegúrate de que la tabla exista al crear una instancia.
         Dim fullMessage As String = $"Message: {ex.Message}" & Environment.NewLine &
                                     $"StackTrace: {ex.StackTrace}" & Environment.NewLine &
                                     $"InnerException: {If(ex.InnerException IsNot Nothing, ex.InnerException.Message, "N/A")}" & Environment.NewLine &
